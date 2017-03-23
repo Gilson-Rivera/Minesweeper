@@ -24,7 +24,7 @@ public class MyPanel extends JPanel {
 	public boolean[][] flagged = new boolean[TOTAL_COLUMNS][TOTAL_ROWS];
 	
 	Random random = new Random();
-	int squareNeightbors = 0;
+	int squareNeightbors;
 	
 	
 
@@ -67,28 +67,32 @@ public class MyPanel extends JPanel {
 			}
 			}
 			
+				
 		
-//		for (int x = 1; x < TOTAL_COLUMNS; x++) {          
-//			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
-//				squareNeightbors = 0;
-//				for (int m = 1; x < TOTAL_COLUMNS; m++) {          
-//					for (int n = 1; y < TOTAL_ROWS - 1; n++) {
-//						if(!(x == m &&  y == n)){
-//							if(isNeightbor(x, y, m, n) == true){
-//								squareNeightbors++;
-//						
-//						}
-//			         }
-//                 }
-//					
-//					neightbors[x][y] = squareNeightbors;
-//			
-//				}
-//				}
-//			}
+		
+		 for (int x = 1; x < TOTAL_COLUMNS; x++) {          
+			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
+				squareNeightbors = 0;
+				for (int m = 1; m < TOTAL_COLUMNS; m++) {          
+					for (int n = 1; n < TOTAL_ROWS - 1; n++) {
+						if(!(x == m &&  y == n)){
+							if(isNeightbor(x, y, m, n)){
+								squareNeightbors++;
+						
+						}
+			         }
+                 }
+					
+					neightbors[x][y] = squareNeightbors;
+			
+				}
+				}
+			}
 	}
 		
 	
+
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

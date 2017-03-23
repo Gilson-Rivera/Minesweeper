@@ -208,7 +208,7 @@ public class MyMouseAdapter extends MouseAdapter {
                     else {
 
                         //On the grid other than on the left column and on the top row:
-                    	System.out.println("Number of mines neightbors: " + myPanel.squareNeightbors);
+                    	System.out.println("Number of mines neightbors: " + 	myPanel.neightbors[myPanel.mouseDownGridX][myPanel.mouseDownGridY] );
                         	
 
                          
