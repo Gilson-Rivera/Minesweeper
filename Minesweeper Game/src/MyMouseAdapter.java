@@ -205,11 +205,11 @@ public class MyMouseAdapter extends MouseAdapter {
 
                         //Released the mouse button on the same cell where it was pressed
 
-                    else {
+                   else {             
 
                         //On the grid other than on the left column and on the top row:
-                    	System.out.println("Number of mines neightbors: " + 	myPanel.neightbors[myPanel.mouseDownGridX][myPanel.mouseDownGridY] );
-                        	
+                    	System.out.println("Number of mines neightbors: " + 	myPanel.neightbours[myPanel.mouseDownGridX][myPanel.mouseDownGridY] );
+                        myPanel.isUncovered[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = true;
 
                          
                     }

@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
@@ -19,7 +20,7 @@ public class MyPanel extends JPanel {
 	
 	public  Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int[][] mines = new int [TOTAL_COLUMNS][TOTAL_ROWS];
-	public int[][] neightbors = new int [TOTAL_COLUMNS][TOTAL_ROWS];
+	public int[][] neightbours = new int [TOTAL_COLUMNS][TOTAL_ROWS];
 	public boolean[][] isUncovered = new boolean[TOTAL_COLUMNS][TOTAL_ROWS];
 	public boolean[][] flagged = new boolean[TOTAL_COLUMNS][TOTAL_ROWS];
 	
@@ -53,7 +54,7 @@ public class MyPanel extends JPanel {
 		}
 	
 	
-				for (int x = 1; x < TOTAL_COLUMNS; x++) {   //Generate random mines with 20% of probability for each square.
+		for (int x = 1; x < TOTAL_COLUMNS; x++) {   //Generate random mines with 20% of probability for each square.
 			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
 				if(random.nextInt(100) < 20){
 					mines[x][y] = 1;                // If it is 1, it has a mine. If it is 0, it is empty.
@@ -83,7 +84,7 @@ public class MyPanel extends JPanel {
 			         }
                  }
 					
-					neightbors[x][y] = squareNeightbors;
+					neightbours[x][y] = squareNeightbors;
 			
 				}
 				}
@@ -130,13 +131,52 @@ public class MyPanel extends JPanel {
 					g.setColor(c);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 				}
-			}
-		}
-		for (int x = 0; x < TOTAL_COLUMNS; x++) {
-			for (int y = 0; y < TOTAL_ROWS; y++) {
 				if(mines[x][y] == 1){
-					g.setColor(Color.YELLOW);
+					g.setColor(Color.BLACK);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+				}
+				if(isUncovered[x][y] == true){
+					g.setColor(Color.GRAY);
+					if(mines[x][y] == 1){
+						g.setColor(Color.BLACK);
+					}
+					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+				}
+				if(isUncovered[x][y] == true){
+					g.setColor(Color.BLUE);
+					if(mines[x][y] == 0 && neightbours[x][y] != 0){
+						if(neightbours[x][y] == 1){
+							g.setColor(Color.BLUE);
+						}
+						else if(neightbours[x][y] == 2){
+							g.setColor(Color.GREEN);
+						}
+						else if(neightbours[x][y] == 3){
+							g.setColor(Color.RED);
+						}
+						else if(neightbours[x][y] == 4){
+							g.setColor(new Color(0,0,128));
+						}
+						else if(neightbours[x][y] == 5){
+							g.setColor(new Color(178,34,34));
+						}
+						else if(neightbours[x][y] == 6){
+							g.setColor(new Color(72,209,204));
+						}
+						else if(neightbours[x][y] == 7){
+							g.setColor(Color.BLACK);
+						}
+						else if(neightbours[x][y] == 8){
+							g.setColor(Color.DARK_GRAY);
+						}
+					     g.setFont(new Font("Tahoma", Font.BOLD, 25));
+					     g.drawString(Integer.toString(neightbours[x][y]), x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 7, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 25);
+					}
+					else if(mines[x][y] == 1){
+						g.setFont(new Font("Tahoma", Font.BOLD, 25));
+					    g.drawString("M", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 4, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 25);
+					}
+
 				}
 			}
 		}	
