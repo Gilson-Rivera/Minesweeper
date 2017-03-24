@@ -28,10 +28,6 @@ public class MyPanel extends JPanel {
 	Random random = new Random();
 	int squareNeightbors;
 	
-	public boolean won = false;
-	public boolean lost = false;
-	
-	
 	
 
 	
@@ -135,14 +131,29 @@ public class MyPanel extends JPanel {
 				}
 				
 				if(isUncovered[x][y] == true){
-					g.setColor(Color.GRAY);
-					if(mines[x][y] == 1){
-						g.setColor(Color.BLACK);
+					if(mines[x][y] == 0){
+						g.setColor(Color.GRAY);
+						g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+
 					}
-					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+					else{
+						g.setColor(Color.BLACK);
+						for (int i = 0; i < TOTAL_COLUMNS; i++) {
+							for (int j = 0; j < TOTAL_ROWS; j++) {
+								if(mines[i][j]==1){
+									isUncovered[i][j]=true;
+									g.fillRect(x1 + GRID_X + (i * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (j * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+
+									
+								}
+							}
+						
+					}
+					}
+					//g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 				}
 				if(isUncovered[x][y] == true){
-					g.setColor(Color.BLUE);
+				
 					if(mines[x][y] == 0 && neightbours[x][y] != 0){
 						if(neightbours[x][y] == 1){
 							g.setColor(Color.BLUE);
@@ -171,11 +182,7 @@ public class MyPanel extends JPanel {
 					     g.setFont(new Font("Tahoma", Font.BOLD, 25));
 					     g.drawString(Integer.toString(neightbours[x][y]), x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 7, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 25);
 					}
-					else if(mines[x][y] == 1){
-						g.setColor(Color.BLACK);
-						g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
-						
-					}
+					
 
 				}
 			}
@@ -246,8 +253,6 @@ public class MyPanel extends JPanel {
 		
 	}
 	public void resetGame(){
-		won = false;
-		lost = false;
 		
 		for (int x = 1; x < TOTAL_COLUMNS; x++) {   //Generate random mines with 20% of probability for each square.
 			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
@@ -284,6 +289,7 @@ public class MyPanel extends JPanel {
 		
 		
 	}
+	
 	
 	
 }
