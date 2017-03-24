@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.sql.Date;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -26,6 +27,10 @@ public class MyPanel extends JPanel {
 	
 	Random random = new Random();
 	int squareNeightbors;
+	
+	public boolean won = false;
+	public boolean lost = false;
+	
 	
 	
 
@@ -68,10 +73,7 @@ public class MyPanel extends JPanel {
 			}
 			}
 			
-				
-		
-		
-		 for (int x = 1; x < TOTAL_COLUMNS; x++) {          
+		for (int x = 1; x < TOTAL_COLUMNS; x++) {          
 			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
 				squareNeightbors = 0;
 				for (int m = 1; m < TOTAL_COLUMNS; m++) {          
@@ -131,10 +133,7 @@ public class MyPanel extends JPanel {
 					g.setColor(c);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 				}
-				if(mines[x][y] == 1){
-					g.setColor(Color.BLACK);
-					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
-				}
+				
 				if(isUncovered[x][y] == true){
 					g.setColor(Color.GRAY);
 					if(mines[x][y] == 1){
@@ -173,8 +172,9 @@ public class MyPanel extends JPanel {
 					     g.drawString(Integer.toString(neightbours[x][y]), x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 7, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 25);
 					}
 					else if(mines[x][y] == 1){
-						g.setFont(new Font("Tahoma", Font.BOLD, 25));
-					    g.drawString("M", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 4, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 25);
+						g.setColor(Color.BLACK);
+						g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+						
 					}
 
 				}
@@ -243,6 +243,45 @@ public class MyPanel extends JPanel {
 			return true;
 		}
 		return false;
+		
+	}
+	public void resetGame(){
+		won = false;
+		lost = false;
+		
+		for (int x = 1; x < TOTAL_COLUMNS; x++) {   //Generate random mines with 20% of probability for each square.
+			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
+				if(random.nextInt(100) < 20){
+					mines[x][y] = 1;                // If it is 1, it has a mine. If it is 0, it is empty.
+				}
+				else{
+					mines[x][y] = 0;
+					
+				}
+				isUncovered[x][y] = false;            // Initially, all mines will be covered.
+				flagged[x][y] = false;
+			}
+			}
+			
+		for (int x = 1; x < TOTAL_COLUMNS; x++) {          
+			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
+				squareNeightbors = 0;
+				for (int m = 1; m < TOTAL_COLUMNS; m++) {          
+					for (int n = 1; n < TOTAL_ROWS - 1; n++) {
+						if(!(x == m &&  y == n)){
+							if(isNeightbor(x, y, m, n)){
+								squareNeightbors++;
+						
+						}
+			         }
+                 }
+					
+					neightbours[x][y] = squareNeightbors;
+			
+				}
+				}
+			}
+		
 		
 	}
 	
