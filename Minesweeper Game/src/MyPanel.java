@@ -85,7 +85,7 @@ public class MyPanel extends JPanel {
 					neightbours[x][y] = squareNeightbors;
 			
 				}
-				}
+			}
 			}
 	}
 		
@@ -130,8 +130,65 @@ public class MyPanel extends JPanel {
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 				}
 				
+				
+				//Uncover all mines when user lose.
 				if(isUncovered[x][y] == true){
 					if(mines[x][y] == 0){
+						if(neightbours[x][y]==0){
+							
+							// Uncover neightbour squares recursively if they doesn't have surrounding mines.
+							for(int j=x; j>0;j--){
+								if(neightbours[j][y]==0){
+									isUncovered[j][y]=true;
+								}
+								if(neightbours[j][y]!= 0){
+									isUncovered[j][y]=true;
+									break;
+								}
+								g.setColor(Color.GRAY);
+								g.fillRect(x1 + GRID_X + (j * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+							
+							for(int i=x; i<TOTAL_COLUMNS; i++){
+								if(neightbours[i][y]==0){
+									isUncovered[i][y]=true;
+								}
+								if(neightbours[i][y]!= 0){
+									isUncovered[i][y]=true;
+									break;
+								}
+								g.setColor(Color.GRAY);
+								g.fillRect(x1 + GRID_X + (i * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+								
+							
+							
+							for(int m=y; m<TOTAL_ROWS - 1; m++){ 
+								if(neightbours[x][m]==0){
+									isUncovered[x][m]=true;
+								}
+								if(neightbours[x][m]!= 0){
+									isUncovered[x][m]=true;
+									break;
+								}
+								g.setColor(Color.GRAY);
+								g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (m * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+							
+							for(int n=y; n>0; n--){
+								if(neightbours[x][n]==0){
+									isUncovered[x][n]=true;
+								}
+								if(neightbours[x][n]!= 0){
+									isUncovered[x][n]=true;
+									break;
+								}
+								g.setColor(Color.GRAY);
+								g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (n * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+							}
+							
+							
+							}
+							}
+							}
+						}
 						g.setColor(Color.GRAY);
 						g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 
@@ -150,7 +207,7 @@ public class MyPanel extends JPanel {
 						
 					}
 					}
-					//g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+				
 				}
 				if(isUncovered[x][y] == true){
 				
@@ -185,6 +242,7 @@ public class MyPanel extends JPanel {
 					
 
 				}
+							
 			}
 		}	
 	 }
@@ -284,12 +342,14 @@ public class MyPanel extends JPanel {
 					neightbours[x][y] = squareNeightbors;
 			
 				}
-				}
 			}
+		}
 		
-		
-	}
+			
+		}
 	
-	
-	
+
 }
+
+
+	
