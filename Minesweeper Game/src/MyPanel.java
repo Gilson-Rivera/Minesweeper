@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.Random;
 import javax.swing.JPanel;
 
+// recursion, clicks after finished, win message, 
+
 public class MyPanel extends JPanel {
 	private static final long serialVersionUID = 3426940946811133635L;
 	private static final int GRID_X = 25;
@@ -162,14 +164,6 @@ public class MyPanel extends JPanel {
 					    }
 					
 				}
-//				else{
-//					if(flagged[x][y]==false){
-//						g.setColor(Color.RED);
-//						g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
-//						flagged[x][y]=true;									
-//
-//					}
-//				}
 				if(isUncovered[x][y] == true){
 				
 					if(mines[x][y] == 0 && neightbours[x][y] != 0){
