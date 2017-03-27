@@ -210,7 +210,11 @@ public class MyMouseAdapter extends MouseAdapter {
                         //On the grid other than on the left column and on the top row:
                     	System.out.println("Number of mines neightbors: " + 	myPanel.neightbours[myPanel.mouseDownGridX][myPanel.mouseDownGridY] );
                         myPanel.isUncovered[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = true;
-
+                        
+                        if(myPanel.isUncovered[5][0]){
+                        	myPanel.resetGame();
+                        	myPanel.isUncovered[5][0] = false;
+                        }
                          
                     }
 
@@ -239,43 +243,28 @@ public class MyMouseAdapter extends MouseAdapter {
 
             }
             JFrame myFrame2 = (JFrame) c2;
-
             MyPanel myPanel2 = (MyPanel) myFrame2.getContentPane().getComponent(0);
-
             Insets myInsets2 = myFrame2.getInsets();
-
             int x3 = myInsets2.left;
-
             int y3 = myInsets2.top;
-
             e.translatePoint(-x3, -y3);
-
             int x2 = e.getX();
-
             int y2 = e.getY();
-
             myPanel2.x = x2;
-
             myPanel2.y = y2;
-
+           
             myPanel2.mouseDownGridX = myPanel2.getGridX(x2, y2);
-
             myPanel2.mouseDownGridY = myPanel2.getGridY(x2, y2);
 
-
-
             int gridX2 = myPanel2.getGridX(x2, y2);
-
             int gridY2 = myPanel2.getGridY(x2, y2);
-
-
-
+            
+          //  myPanel2.flagged[myPanel2.mouseDownGridX][myPanel2.mouseDownGridY] = true;
+            
+            
+            
+           
             if ((gridX2 == -1) || (gridY2 == -1)) {    // Clicked outside
-
-
-
-
-
 
             }
 
@@ -291,6 +280,5 @@ public class MyMouseAdapter extends MouseAdapter {
         }
 
     }
-   
 
 }
