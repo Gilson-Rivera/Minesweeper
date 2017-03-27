@@ -225,7 +225,7 @@ public class MyPanel extends JPanel {
 		g.fillRect(GRID_X, GRID_Y, (INNER_CELL_SIZE+1)*2, INNER_CELL_SIZE+1);
 		seconds =(int)((new Date().getTime()-startDate.getTime())/1000);
 		if(seconds>100){
-			seconds = 1000;
+			seconds = 10000;
 		}
 		//System.out.println(seconds);
 		g.setColor(Color.RED);
