@@ -234,7 +234,7 @@ public class MyPanel extends JPanel {
 		g.drawString("00"+Integer.toString(seconds), GRID_X+8, GRID_Y+INNER_CELL_SIZE);
 			}else if(seconds<100){
 				g.drawString("0"+Integer.toString(seconds), GRID_X+8, GRID_Y+INNER_CELL_SIZE);
-			}
+			}     
 		// flags
 //		g.setColor(Color.RED);
 //		g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
