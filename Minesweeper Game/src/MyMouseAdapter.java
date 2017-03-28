@@ -305,18 +305,28 @@ public class MyMouseAdapter extends MouseAdapter {
 				if ((gridX2 == -1) || (gridY2 == -1)) {
 					//Is releasing outside
 					//Do nothing
-				} else {
+				} 
+				
+				if((gridX2 == 0) || (gridY2 == 0)){
+					// Do nothing
+				}
+				
+				else {
+					
+					
 					if ((myPanel2.mouseDownGridX != gridX2) || (myPanel2.mouseDownGridY != gridY2)) {
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
 					} else {
+						
 						//Released the mouse button on the same cell where it was pressed
 						Color newColor = null;
 						if(myPanel2.colorArray[myPanel2.mouseDownGridX][myPanel2.mouseDownGridY].equals(Color.WHITE)){
 						      newColor = Color.RED;
 						}
-						else{
+						else{ 
 							newColor = Color.WHITE;
+						
 						}
 						myPanel2.colorArray[myPanel2.mouseDownGridX][myPanel2.mouseDownGridY] = newColor;
 						myPanel2.repaint();
