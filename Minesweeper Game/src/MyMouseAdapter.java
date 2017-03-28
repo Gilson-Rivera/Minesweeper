@@ -176,6 +176,8 @@ public class MyMouseAdapter extends MouseAdapter {
             int gridY = myPanel.getGridY(x, y);
             
             
+            
+           
           
 
        
@@ -184,6 +186,7 @@ public class MyMouseAdapter extends MouseAdapter {
                 //Had pressed outside
 
                 //Do nothing
+            	 
 
             } else {
 
@@ -205,11 +208,19 @@ public class MyMouseAdapter extends MouseAdapter {
 
                         //Released the mouse button on the same cell where it was pressed
 
-                   else {             
-
-                        //On the grid other than on the left column and on the top row:
-                    	System.out.println("Number of mines neightbours: " + 	myPanel.neightbours[myPanel.mouseDownGridX][myPanel.mouseDownGridY] );
+                   else { 
+                	   if ((gridX == 0) || (gridY == 0)) {
+                       	// Do nothing
+                       	
+                       }
+                	   else{
+                		 //On the grid other than on the left column and on the top row:
+                       	System.out.println("Number of mines neightbours: " + 	myPanel.neightbours[myPanel.mouseDownGridX][myPanel.mouseDownGridY] );
                         myPanel.isUncovered[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = true;
+                	   }
+
+                        
+                       
 
                          
                     }
