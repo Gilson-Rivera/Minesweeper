@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.util.Date;
 import java.util.Random;
 import javax.swing.JPanel;
 
@@ -214,8 +213,6 @@ public class MyPanel extends JPanel {
 			g.setFont(new Font("Tahoma", Font.BOLD, 35));
 			g.drawString("YOU WIN!!!", 90,height-5);
 		}
-
-
 
 	}
 

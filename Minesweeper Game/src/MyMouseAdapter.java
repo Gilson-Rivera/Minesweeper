@@ -8,15 +8,10 @@ import java.awt.event.MouseAdapter;
 
 import java.awt.event.MouseEvent;
 
-import java.util.Random;
-
-
 import javax.swing.JFrame;
 
 
 public class MyMouseAdapter extends MouseAdapter {
-
-	private Random generator = new Random();
 
 	public void mousePressed(MouseEvent e) {
 
@@ -64,11 +59,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 			myPanel.repaint();
 
-
-
 			break;
-
-
 
 
 
@@ -117,7 +108,6 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel2.repaint();
 
 			break;
-
 
 
 
@@ -177,10 +167,6 @@ public class MyMouseAdapter extends MouseAdapter {
 
 
 
-
-
-
-
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
 
 				//Had pressed outside
@@ -208,7 +194,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 					//Released the mouse button on the same cell where it was pressed
 
-					else { 
+					else {   // Reset button activation
 						if ((gridX == 5) && (gridY == 0)) {
 							myPanel.isUncovered[5][0] = true;
 							myPanel.resetGame();
@@ -231,14 +217,8 @@ public class MyMouseAdapter extends MouseAdapter {
 									myPanel.numberOfUncoveredMines+=1;
 								}
 								
-
 							}
 						}
-
-
-
-
-
 
 					}
 
@@ -312,8 +292,7 @@ public class MyMouseAdapter extends MouseAdapter {
 				}
 				
 				else {
-					
-					
+										
 					if ((myPanel2.mouseDownGridX != gridX2) || (myPanel2.mouseDownGridY != gridY2)) {
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
@@ -324,7 +303,7 @@ public class MyMouseAdapter extends MouseAdapter {
 						if(myPanel2.colorArray[myPanel2.mouseDownGridX][myPanel2.mouseDownGridY].equals(Color.WHITE)){
 						      newColor = Color.RED;
 						}
-						else{ 
+						else{            //To remove flags
 							newColor = Color.WHITE;
 						
 						}
