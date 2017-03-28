@@ -29,16 +29,13 @@ public class MyPanel extends JPanel {
 	public boolean victory = false;
 	public static boolean lost = false;
 
-	public int smileyX=150, smileyY=30;
-
-
-
 	int numberOfMines;
 	int squaresWithoutMines;
 	int numberOfUncoveredMines;
+	int squareNeightbors;
 
 	Random random = new Random();
-	int squareNeightbors;
+	
 
 
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
@@ -65,17 +62,7 @@ public class MyPanel extends JPanel {
 
 		}
 
-
-		this.minesGenerator();
-
-		//		for (int x = 0; x < TOTAL_COLUMNS; x++) {
-		//			for (int y = 0; y < TOTAL_ROWS; y++) {                           // Black mines on
-		//				
-		//				if (mines[x][y] == 1) {
-		//					
-		//					colorArray[x][y] = Color.BLACK;
-		//				}}}
-		//		
+		this.minesGenerator();				
 
 		//Counts the number of mines neightbours.
 		for (int x = 1; x < TOTAL_COLUMNS; x++) {           
@@ -160,7 +147,9 @@ public class MyPanel extends JPanel {
 					}
 
 				}
-				if(isUncovered[x][y] == true){              //Set different colors depending of the number of mines to the numbers
+				
+				 //Set different colors depending of the number of mines to the numbers
+				if(isUncovered[x][y] == true){             
 
 					if(mines[x][y] == 0 && neightbours[x][y] != 0){
 						if(neightbours[x][y] == 1){
@@ -221,9 +210,9 @@ public class MyPanel extends JPanel {
 		}
 
 		if(victory == true){
-			g.setColor(Color.GREEN);
+			g.setColor(Color.BLUE);
 			g.setFont(new Font("Tahoma", Font.BOLD, 35));
-			g.drawString("YOU WIN!!", 90,height-5);
+			g.drawString("YOU WIN!!!", 90,height-5);
 		}
 
 
@@ -350,14 +339,13 @@ public class MyPanel extends JPanel {
 		}
 	}
 
-	public void checkNeightbours(int x, int y) { 	//Recursive method to uncover a chain of tiles that have no surrounding bombs
+	public void checkNeightbours(int x, int y) { 	
 		//Check if there aren't any surrounding bombs
 		if(neightbours[x][y] == 0) {
 			for(int i=x-1; i<=x+1; i++) {
 				for (int j=y-1; j<=y+1; j++) {
 					//Check if coordinates are inside the grid
 					if(i < getTotalColumns() && i > 0 && j < getTotalRows() - 1 && j > 0) {
-						//Check that tile is uncovered
 						if(isUncovered[i][j]==false){
 							isUncovered[i][j] = true;
 							this.numberOfUncoveredMines+=1;
