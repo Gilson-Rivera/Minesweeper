@@ -226,9 +226,11 @@ public class MyMouseAdapter extends MouseAdapter {
 								// Do nothing until resets game.
 							}
 							else{
-
-
-								myPanel.isUncovered[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = true;
+								if(myPanel.isUncovered[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == false){
+									myPanel.isUncovered[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = true;
+									myPanel.numberOfUncoveredMines+=1;
+								}
+								
 
 							}
 						}

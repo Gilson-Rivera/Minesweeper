@@ -81,23 +81,24 @@ public class MyPanel extends JPanel {
 				}
 				else{
 					mines[x][y] = 0;
+					this.squaresWithoutMines+= 1;
 
 				}
 				isUncovered[x][y] = false;            // Initially, all mines will be covered.
 				flagged[x][y] = false;
 			}
-			this.squaresWithoutMines = 81 - this.numberOfMines;
+			
 			
 			
 		}
 //		for (int x = 0; x < TOTAL_COLUMNS; x++) {
-//			for (int y = 0; y < TOTAL_ROWS; y++) {
+//			for (int y = 0; y < TOTAL_ROWS; y++) {                           // Black mines on
 //				
 //				if (mines[x][y] == 1) {
 //					
 //					colorArray[x][y] = Color.BLACK;
 //				}}}
-		
+//		
 
 		for (int x = 1; x < TOTAL_COLUMNS; x++) {           //Counts the number of mines neightbours
 			for (int y = 1; y < TOTAL_ROWS - 1; y++) {
@@ -117,6 +118,8 @@ public class MyPanel extends JPanel {
 				}
 			}			
 		}
+		System.out.println(this.numberOfMines);
+		System.out.println(this.squaresWithoutMines);
 	}
 
 
@@ -163,7 +166,7 @@ public class MyPanel extends JPanel {
 				if(isUncovered[x][y] == true){
 					if(mines[x][y] == 0){
 						
-						this.inspect(x, y);    // Uncover all neightbours that does'nt have adjacent bombs,
+						this.inspect(x, y);    // Uncover all neightbours that doesn't have adjacent bombs.
 
 						g.setColor(Color.GRAY);
 						g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
@@ -259,10 +262,13 @@ public class MyPanel extends JPanel {
 			g.setFont(new Font("Tahoma", Font.BOLD, 35));
 			g.drawString("Game Over!", 70,height-5);
 		}
+		
 		if(victory == true){
+			g.setColor(Color.GREEN);
 			g.setFont(new Font("Tahoma", Font.BOLD, 35));
 			g.drawString("YOU WIN!!", 70,height-5);
 		}
+		
 		
 		
 	}
@@ -360,12 +366,13 @@ public class MyPanel extends JPanel {
 				}
 				else{
 					mines[x][y] = 0;
+					this.squaresWithoutMines+=1;
 
 				}
 				isUncovered[x][y] = false;            // Initially, all mines will be covered.
 				flagged[x][y] = false;
 			}
-			this.squaresWithoutMines = 81 - this.numberOfMines;
+			
 			
 		}
 
@@ -388,7 +395,8 @@ public class MyPanel extends JPanel {
 			}
 		}
 		
-		
+		System.out.println(this.numberOfMines);
+		System.out.println(this.squaresWithoutMines);
 		
 
 	}
@@ -407,16 +415,31 @@ public class MyPanel extends JPanel {
 						if(isUncovered[i][j]==false){
 							isUncovered[i][j] = true;
 							this.numberOfUncoveredMines+=1;
+							
 							inspect(i, j);
 						}
 					}
 				}
 			}
 		}
-//		if(this.numberOfUncoveredMines == this.numberOfMines){
-//			victory = true;
-//		}
+		else{
+			if(x < getTotalColumns() && x > 0 && y < getTotalRows() - 1 && y > 0) {
+				if(isUncovered[x][y]==false){
+			        isUncovered[x][y] = true;
+			       this.numberOfUncoveredMines+=1;
+			        
+				}
+			
+		}
+		}
+			
+		
+		if(this.numberOfUncoveredMines == this.squaresWithoutMines){
+			victory = true;
+		}
+		
+		
+	}
 	}
 
 
-}
